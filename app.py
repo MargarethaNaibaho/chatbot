@@ -2,22 +2,22 @@ def allKodeKecamatan():
     kode = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U"]
     return kode
 
-def kecamatan() :
+def kecamatan():
     kecamatan = ["Medan Amplas","Medan Area","Medan Barat","Medan Baru","Medan Belawan","Medan Deli","Medan Denai","Medan Helvetia","Medan Johor","Medan Kota","Medan Labuhan","Medan Maimun","Medan Marelan","Medan Perjuangan","Medan Petisah","Medan Polonia","Medan Selayang","Medan Sunggal","Medan Tembung","Medan Timur","Medan Tuntungan"]
     return kecamatan
 
-def Menu() :
-    teks = "Kecamatan apa yang ingin kamu ketahui mengenai CoVid-19?\n"
+def Menu():
+    teks = "Kecamatan apa yang ingin kamu ketahui mengenai CoVid-19?\n\n"
     
     kecamatan1 = kecamatan()
     allKodeKecamatan1 = allKodeKecamatan()
 
-    for i in range (len(kecamatan1)):
-        teks += allKodeKecamatan1[i].upper() + ". " + kecamatan1[i] + "\ns" 
+    for i in range(len(kecamatan1)):
+        teks += allKodeKecamatan1[i].upper() + ". " + kecamatan1[i] + "\n" 
     
     return teks
 
-def kataSalah() :
+def kataSalah():
     teks = "Keyword tidak tersedia"
 
     return teks
@@ -36,14 +36,14 @@ def hasilKecamatan(kodekecamatan):
     import requests
     from bs4 import BeautifulSoup
     import pandas as pd
-    from datetime import date
+    import numpy as np
 
     URL = "https://covid19.pemkomedan.go.id/index.php?page=stat_kec"
     r = requests.get(URL) 
     soup = BeautifulSoup(r.content, 'html5lib')
     table = soup.find('tbody') 
 
-    no = []
+    No = []
     nama_kecamatan = []
     odp_kecamatan = []
     otg_kecamatan = []
@@ -55,7 +55,7 @@ def hasilKecamatan(kodekecamatan):
     
     for i in range(len(table.findAll('tr'))):
 
-        no.append(i+1)
+        No.append(i+1)
         nama_kecamatan.append(table.findAll('tr')[i].findAll('td')[1].text)
         odp_kecamatan.append(table.findAll('tr')[i].findAll('td')[2].text)
         otg_kecamatan.append(table.findAll('tr')[i].findAll('td')[4].text)
@@ -65,7 +65,7 @@ def hasilKecamatan(kodekecamatan):
         sembuh_kecamatan.append(table.findAll('tr')[i].findAll('td')[11].text)
         meninggal_positif_kecamatan.append(table.findAll('tr')[i].findAll('td')[12].text)
    
-    df_kecamatan = pd.DataFrame(no, columns =['No'])
+    df_kecamatan = pd.DataFrame(No, columns =['No'])
     df_kecamatan = df_kecamatan.rename(columns={"0":"No"})
     df_kecamatan['Kecamatan'] = nama_kecamatan
     df_kecamatan['ODP'] = odp_kecamatan
@@ -81,7 +81,6 @@ def hasilKecamatan(kodekecamatan):
     is_kecamatan = df_kecamatan['kode']==kodekecamatan
     df_cari = df_kecamatan[is_kecamatan]
 
-    tglUpdate = str
     kecamatan = str(df_cari['Kecamatan'].to_string().split('    ')[1])
     odp = int(df_cari['ODP'])
     otg = int(df_cari['OTG'])
@@ -91,7 +90,7 @@ def hasilKecamatan(kodekecamatan):
     sembuh = int(df_cari['Sembuh'])
     meninggal_positif = int(df_cari['Meninggal positif'])
 
-    teks = "Data Covid-19 di Kecamatan " + kecamatan + " (per"+tglUpdate+")\n\n"
+    teks = "Data Covid-19 di Kecamatan " + kecamatan
     teks += "ODP: " + str(odp) + "\n"
     teks += "OTG: " + str(otg) + "\n"
     teks += "PP : " + str(pp) + "\n"
@@ -110,10 +109,10 @@ from linebot import (
     LineBotApi, WebhookHandler
 )
 from linebot.exceptions import (
-    InvalidSignatureError
+    LineBotApiError, InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage
+    MessageEvent, TextMessage, TextSendMessage, SourceUser
 )
 
 app = Flask(__name__)
@@ -133,6 +132,11 @@ def callback():
     # handle webhook body
     try:
         handler.handle(body, signature)
+    except LineBotApiError as e:
+        print("Got exception from LINE Messaging API: %s\n" % e.message)
+        for m in e.error.details:
+            print("  %s: %s" % (m.property, m.message))
+        print("\n")
     except InvalidSignatureError:
         abort(400)
 
@@ -142,7 +146,7 @@ def callback():
 def handle_message(event):
     """" Here's all the messages will be handled and processed by the program """
     
-    msg = (event.message.text).lower().replace(" ","")
+    msg = event.message.text.lower().replace(" ","")
 
     if (msg=='hai' or msg=='hi' or msg=='halo' or msg=='hello' or msg=='hey' or msg=='p'):
         if isinstance(event.source, SourceUser):
@@ -166,8 +170,8 @@ def handle_message(event):
         )
     
     else:
-        if(cekKecamatan(kodekecamatan)):
-            reply = hasilKecamatan()
+        if(cekKecamatan(msg)):
+            reply = hasilKecamatan(msg)
             line_bot_api.reply_message(
                 event.reply_token, [
                     TextSendMessage(text=reply),
@@ -184,5 +188,4 @@ def handle_message(event):
             )
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run()
