@@ -77,8 +77,7 @@ def hasilKecamatan(kodekecamatan):
     df_kecamatan['Meninggal positif'] = meninggal_positif_kecamatan
 
     df_kecamatan['Kode'] = allKodeKecamatan()
-
-    is_kecamatan = df_kecamatan['kode']==kodekecamatan
+    is_kecamatan = df_kecamatan['Kode'].lower()==kodekecamatan
     df_cari = df_kecamatan[is_kecamatan]
 
     kecamatan = str(df_cari['Kecamatan'].to_string().split('    ')[1])
@@ -169,8 +168,19 @@ def handle_message(event):
             ]
         )
     
-    else:
-        if(cekKecamatan(msg)):
+    elif (
+        msg=="a" or msg=="b"
+        or msg=="c" or msg=="d"
+        or msg=="e" or msg=="f"
+        or msg=="g" or msg=="h"
+        or msg=="i" or msg=="j"
+        or msg=="k" or msg=="l"
+        or msg=="m" or msg=="n"
+        or msg=="o" or msg=="p"
+        or msg=="q" or msg=="r"
+        or msg=="s" or msg=="t"
+        or msg=="u"
+         ):
             reply = hasilKecamatan(msg)
             line_bot_api.reply_message(
                 event.reply_token, [
@@ -178,14 +188,14 @@ def handle_message(event):
                     TextSendMessage(text=kembali())
                 ]
             )
-        else:
-            reply = kataSalah()
-            line_bot_api.reply_message(
-                event.reply_token, [
-                    TextSendMessage(text=reply),
-                    TextSendMessage(text=kembali())
-                ]
-            )
+    else:
+        reply = kataSalah()
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text=reply),
+                TextSendMessage(text=kembali())
+            ]
+        )
 
 if __name__ == "__main__":
     app.run()
