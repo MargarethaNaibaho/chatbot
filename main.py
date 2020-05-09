@@ -168,7 +168,7 @@ def handle_message(event):
             ]
         )
     
-    elif (
+    if (
         msg=="a" or msg=="b"
         or msg=="c" or msg=="d"
         or msg=="e" or msg=="f"
