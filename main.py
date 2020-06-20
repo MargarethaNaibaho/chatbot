@@ -29,7 +29,9 @@ def kembali():
 
 def cekKecamatan(kodekecamatan):
     allKodeKecamatan1 = allKodeKecamatan()
-
+    
+    allKodeKecamatan1 = [allKodeKecamatan2.lower() for allKodeKecamatan2 in allKodeKecamatan1]
+    
     return kodekecamatan in allKodeKecamatan1
 
 def hasilKecamatan(kodekecamatan):
@@ -160,27 +162,16 @@ def handle_message(event):
                 event.reply_token,
                 TextSendMessage(text="Bot can't use profile API without user ID"))
     
-    if msg == "menu":
+    elif msg == "menu":
         reply = Menu()
         line_bot_api.reply_message(
             event.reply_token, [
                 TextSendMessage(text=reply)
             ]
         )
-    
-    if (
-        msg=="a" or msg=="b"
-        or msg=="c" or msg=="d"
-        or msg=="e" or msg=="f"
-        or msg=="g" or msg=="h"
-        or msg=="i" or msg=="j"
-        or msg=="k" or msg=="l"
-        or msg=="m" or msg=="n"
-        or msg=="o" or msg=="p"
-        or msg=="q" or msg=="r"
-        or msg=="s" or msg=="t"
-        or msg=="u"
-         ):
+        
+    else:
+        if (cekKecamatan(msg)):
             reply = hasilKecamatan(msg)
             line_bot_api.reply_message(
                 event.reply_token, [
@@ -188,14 +179,14 @@ def handle_message(event):
                     TextSendMessage(text=kembali())
                 ]
             )
-    else:
-        reply = kataSalah()
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-        )
+        else:
+            reply = kataSalah()
+            line_bot_api.reply_message(
+                event.reply_token, [
+                    TextSendMessage(text=reply),
+                    TextSendMessage(text=kembali())
+                ]
+            )
 
 if __name__ == "__main__":
     app.run()
