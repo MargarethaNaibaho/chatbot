@@ -27,6 +27,13 @@ def kembali():
 
     return teks
 
+def cekKecamatan(kodekecamatan):
+    allKodeKecamatan1 = allKodeKecamatan()
+    
+    allKodeKecamatan1 = [allKodeKecamatan2.lower() for allKodeKecamatan2 in allKodeKecamatan1]
+    
+    return kodekecamatan in allKodeKecamatan1
+
 def hasilKecamatan(kodekecamatan):
     import requests
     from bs4 import BeautifulSoup
@@ -72,7 +79,7 @@ def hasilKecamatan(kodekecamatan):
     df_kecamatan['Meninggal positif'] = meninggal_positif_kecamatan
 
     df_kecamatan['Kode'] = allKodeKecamatan()
-    is_kecamatan = df_kecamatan['Kode'].lower()==kodekecamatan
+    is_kecamatan = df_kecamatan['Kode']==kodekecamatan.upper()
     df_cari = df_kecamatan[is_kecamatan]
 
     kecamatan = str(df_cari['Kecamatan'].to_string().split('    ')[1])
@@ -163,203 +170,23 @@ def handle_message(event):
             ]
         )
         
-    elif msg == 'a':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
-    elif msg == 'b':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
-    elif msg == 'c':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
-    elif msg == 'd':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-        
-    elif msg == 'e':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
-    elif msg == 'f':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
-    elif msg == 'g':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
-    elif msg == 'h':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
-    elif msg == 'i':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
-    elif msg == 'j':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
-    elif msg == 'k':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
-    elif msg == 'l':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
-    elif msg == 'm':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
-    elif msg == 'n':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
-    elif msg == 'o':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-        
-    elif msg == 'p':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-        
-    elif msg == 'q':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-        
-    elif msg == 'r':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
-    elif msg == 's':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
-    elif msg == 't':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
-    elif msg == 'u':
-        reply = hasilKecamatan(msg)
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-         )
-    
     else:
-        reply = kataSalah()
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-        )
+        if (cekKecamatan(msg)):
+            reply = hasilKecamatan(msg)
+            line_bot_api.reply_message(
+                event.reply_token, [
+                    TextSendMessage(text=reply),
+                    TextSendMessage(text=kembali())
+                ]
+            )
+        else:
+            reply = kataSalah()
+            line_bot_api.reply_message(
+                event.reply_token, [
+                    TextSendMessage(text=reply),
+                    TextSendMessage(text=kembali())
+                ]
+            )
 
 if __name__ == "__main__":
     app.run()
