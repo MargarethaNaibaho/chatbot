@@ -39,6 +39,7 @@ def hasilKecamatan(kodekecamatan):
     from bs4 import BeautifulSoup
     import pandas as pd
     import numpy as np
+    import time
 
     URL = "https://covid19.pemkomedan.go.id/index.php?page=stat_kec"
     r = requests.get(URL) 
@@ -90,8 +91,14 @@ def hasilKecamatan(kodekecamatan):
     positif = int(df_cari['Positif'])
     sembuh = int(df_cari['Sembuh'])
     meninggal_positif = int(df_cari['Meninggal positif'])
-
-    teks = "Data Covid-19 di Kecamatan " + kecamatan + "\n"
+    
+    bulan = ("Januari", "Pebruari", "Maret","April", "Mei", "Juni",
+         "Juli", "Agustus", "September", "Oktober", "Nopember", "Desember")
+    hari = ("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu")
+    sekarang = time.time()
+    infowaktu = time.localtime(sekarang)
+    
+    teks = "Data Covid-19 di Kecamatan " + kecamatan + "per " + hari[infowaktu[6]] + ", " + infowaktu[2] + bulan[infowaktu[1]-1] + infowaktu[0] + "\n"
     teks += "ODP: " + str(odp) + "\n"
     teks += "OTG: " + str(otg) + "\n"
     teks += "PP : " + str(pp) + "\n"
