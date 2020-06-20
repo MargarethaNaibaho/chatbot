@@ -91,7 +91,7 @@ def hasilKecamatan(kodekecamatan):
     sembuh = int(df_cari['Sembuh'])
     meninggal_positif = int(df_cari['Meninggal positif'])
 
-    teks = "Data Covid-19 di Kecamatan " + kecamatan
+    teks = "Data Covid-19 di Kecamatan " + kecamatan + "\n"
     teks += "ODP: " + str(odp) + "\n"
     teks += "OTG: " + str(otg) + "\n"
     teks += "PP : " + str(pp) + "\n"
