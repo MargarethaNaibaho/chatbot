@@ -94,11 +94,11 @@ def hasilKecamatan(kodekecamatan):
     
     bulan = ("Januari", "Pebruari", "Maret","April", "Mei", "Juni",
          "Juli", "Agustus", "September", "Oktober", "Nopember", "Desember")
-    hari = ("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu")
+    hari = ("Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu")
     sekarang = time.time()
     infowaktu = time.localtime(sekarang)
     
-    teks = "Data Covid-19 di Kecamatan " + kecamatan + "per " + hari[infowaktu[6]] + ", " + str(infowaktu[2]) + bulan[infowaktu[1]-1] + str(infowaktu[0]) + "\n"
+    teks = "Data Covid-19 di Kecamatan " + kecamatan + " per " + hari[infowaktu[6]] + ", " + str(infowaktu[2]) + " " + bulan[infowaktu[1]-1] + " " + str(infowaktu[0]) + "\n"
     teks += "ODP: " + str(odp) + "\n"
     teks += "OTG: " + str(otg) + "\n"
     teks += "PP : " + str(pp) + "\n"
