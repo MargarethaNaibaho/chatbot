@@ -3,7 +3,7 @@ def dataIndonesia():
     import requests
     source = requests.get('https://www.kompas.com/covid-19')
     soup = BeautifulSoup(source.text, 'lxml')
-    
+    print("Terjadi kesalahan")
     data = soup.find_all('div', {'class':'covid__box2'})
     
     positif = data[0].text.split('i')[2].split(' ')[0]
