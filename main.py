@@ -1,26 +1,29 @@
 def allKodeKecamatan():
-    x = 22
-
-    kode = []
-    for i in range(1, x, 1):
-        angka = str(i)
-        kode.append("D"+angka)
-
+    kode = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U"]
     return kode
 
 def kecamatan():
     kecamatan = ["Medan Amplas","Medan Area","Medan Barat","Medan Baru","Medan Belawan","Medan Deli","Medan Denai","Medan Helvetia","Medan Johor","Medan Kota","Medan Labuhan","Medan Maimun","Medan Marelan","Medan Perjuangan","Medan Petisah","Medan Polonia","Medan Selayang","Medan Sunggal","Medan Tembung","Medan Timur","Medan Tuntungan"]
     return kecamatan
 
-def tampilNamaKecamatan():
-    kode_kecamatan = allKodeKecamatan()
-    nama_kecamatan = kecamatan()
+def Menu():
+    teks = "Kecamatan apa yang ingin kamu ketahui mengenai CoVid-19?\n\n"
+    
+    kecamatan1 = kecamatan()
+    allKodeKecamatan1 = allKodeKecamatan()
 
-    teks = "Berikut kode dan nama kecamatan\n"
-    for i in range(len(kode_kecamatan)):
-        teks += "[" + kode_kecamatan[i] + "]" + " " + nama_kecamatan[i] + "\n"
+    for i in range(len(kecamatan1)):
+        teks += allKodeKecamatan1[i].upper() + ". " + kecamatan1[i] + "\n" 
+    
+    return teks
 
-    teks+= "\nSilahkan masukkan kode sesuai kecamatan yang tersedia"
+def kataSalah():
+    teks = "Keyword tidak tersedia"
+
+    return teks
+
+def kembali():
+    teks = "Ketik 'MENU' untuk ke menu utama"
 
     return teks
 
@@ -106,141 +109,6 @@ def hasilKecamatan(kodekecamatan):
 
     return teks
 
-def dataIndonesia():
-    from bs4 import BeautifulSoup
-    import requests
-    source = requests.get('https://www.kompas.com/covid-19')
-    soup = BeautifulSoup(source.text, 'lxml')
-    data = soup.find_all('div', {'class':'covid__box2'})
-    
-    positif = data[0].text.split('i')[2].split(' ')[0]
-    tambahan = data[0].i.text
-    dirawat = data[1].text.split('t')[1].split(' ')[0]
-    meninggal = data[2].text.split('l')[1].split(' ')[0]
-    sembuh = data[3].text.split('h')[1].split(' ')[0]
-    
-    tgl_Update = soup.find('div', {'class':'covid__header'}).span.text.split(':')[1].split(',')[0]
-    
-    teks = "Data Covid-19 di Indonesia per" + tgl_Update + "\n"
-    teks += "Positif : " + positif + "(" + tambahan + ")" + "\n"
-    teks += "Dirawat : " + dirawat + "\n"
-    teks += "Sembuh : " + sembuh + "\n"
-    teks += "Meninggal dunia (Positif) : " + meninggal + "\n"
-    
-    return teks
-
-def allKodeProvinsi():
-    x = 35
-    kode = []
-    for i in range(1, x, 1):
-        angka = str(i)
-        kode.append("C"+angka)
-
-    return kode
-
-def nameprovinsi():
-    from bs4 import BeautifulSoup
-    import requests
-
-    source = requests.get('https://www.kompas.com/covid-19')
-    soup = BeautifulSoup(source.text, 'lxml')
-
-    nama_prov = soup.find_all('div', {'class':'covid__row'})
-    nama_provinsi = []
-
-    for i in range(len(nama_prov)):
-        nama_provinsi.append(nama_prov[i].find_all('div')[0].text)
-
-    return nama_provinsi
-
-def cekProvinsi(kodeprovinsi):
-    allKodeProvinsi1 = allKodeProvinsi()
-    
-    allKodeProvinsi1 = [allKodeProvinsi2.lower() for allKodeProvinsi2 in allKodeProvinsi1]
-    
-    return kodeprovinsi in allKodeProvinsi1
-
-def tampilNamaProvinsi():
-    kode_provinsi = allKodeProvinsi()
-    nama_provinsi = nameprovinsi()
-
-    teks = "Berikut kode dan nama provinsi\n"
-    for i in range(len(kode_provinsi)):
-        teks += "[" + kode_provinsi[i] + "]" + " " + nama_provinsi[i] + "\n"
-
-    teks+= "\nSilahkan masukkan kode sesuai provinsi yang tersedia"
-
-    return teks
-
-def hasilProvinsi(kodeprovinsi):
-    import requests
-    from bs4 import BeautifulSoup
-    import pandas as pd
-    import numpy as np
-    source = requests.get('https://www.kompas.com/covid-19')
-    soup = BeautifulSoup(source.text, 'lxml')
-    
-    nama_prov = soup.find_all('div', {'class':'covid__row'})
-    tgl_Update = soup.find('div', {'class':'covid__header'}).span.text.split(':')[1].split(',')[0]
-
-    No = []
-    positif_provinsi = []
-    meninggal_positif_provinsi = []
-    sembuh_provinsi = []
-    
-    for i in range(len(nama_prov)):
-
-        No.append(i+1)
-        positif_provinsi.append(nama_prov[i].find('div', {'class':'covid__total'}).find('span', {'class':'-odp'}).text.split(' ')[1])
-        meninggal_positif_provinsi.append(nama_prov[i].find('div', {'class':'covid__total'}).find('span', {'class':'-gone'}).text.split(' ')[1])
-        sembuh_provinsi.append(nama_prov[i].find('div', {'class':'covid__total'}).find('span', {'class':'-health'}).text.split('  ')[1])
-   
-    df_provinsi = pd.DataFrame(No, columns =['No'])
-    df_provinsi = df_provinsi.rename(columns={"0":"No"})
-    df_provinsi['Positif'] = positif_provinsi
-    df_provinsi['Sembuh'] = sembuh_provinsi
-    df_provinsi['Meninggal positif'] = meninggal_positif_provinsi
-
-    df_provinsi['Nama Provinsi'] = nameprovinsi()
-    df_provinsi['Kode'] = allKodeProvinsi()
-
-    is_provinsi = df_provinsi['Kode']==kodeprovinsi.upper()
-    df_cari = df_provinsi[is_provinsi]
-
-    provinsi = str(df_cari['Nama Provinsi'].to_string().split('    ')[1])
-    positif = int(df_cari['Positif'])
-    sembuh = int(df_cari['Sembuh'])
-    meninggal_positif = int(df_cari['Meninggal positif'])
-
-    teks = "Data Covid-19 di Provinsi " + str(provinsi) + " per" + tgl_Update + "\n"
-    teks += "Positif: " + str(positif) + "\n"
-    teks += "Sembuh: " + str(sembuh) + "\n"
-    teks += "Meninggal dunia (Positif): " + str(meninggal_positif) + "\n"
-
-    return teks
-
-def Menu():
-    teks = "Apa yang ingin kamu ketahui?\n\n"
-    teks += "A. Data Covid-19 di Indonesia\n"
-    teks += "C. Data Covid-19 di tiap Provinsi di Indonesia\n"
-    teks += "D. Data Covid-19 di tiap Kecamatan di Kota Medan\n\n"
-
-    teks += "Ketik kode sesuai kode yang tersedia. Contoh : Ketik 'A' untuk melihat data Covid-19 di Indonesia"
-    
-    return teks
-
-def kataSalah():
-    teks = "Keyword tidak tersedia"
-
-    return teks
-
-def kembali():
-    teks = "Ketik 'MENU' untuk ke menu utama"
-
-    return teks
-
-
-
 import requests
 import os
 from flask import Flask, request, abort
@@ -308,34 +176,7 @@ def handle_message(event):
                 TextSendMessage(text=reply)
             ]
         )
-    
-    elif msg == "a":
-        reply = dataIndonesia()
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-        )
-
-    elif msg == "c":
-        reply = tampilNamaProvinsi()
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-        )
-
-    elif msg == "d":
-        reply = tampilNamaKecamatan()
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text=reply),
-                TextSendMessage(text=kembali())
-            ]
-        )
-
+        
     else:
         if (cekKecamatan(msg)):
             reply = hasilKecamatan(msg)
@@ -345,16 +186,6 @@ def handle_message(event):
                     TextSendMessage(text=kembali())
                 ]
             )
-
-        elif (cekProvinsi(msg)):
-            reply = hasilProvinsi(msg)
-            line_bot_api.reply_message(
-                event.reply_token, [
-                    TextSendMessage(text=reply),
-                    TextSendMessage(text=kembali())
-                ]
-            )
-
         else:
             reply = kataSalah()
             line_bot_api.reply_message(
