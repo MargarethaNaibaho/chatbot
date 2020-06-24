@@ -11,15 +11,14 @@ def dataIndonesia():
     dirawat = data[1].text.split('t')[1].split(' ')[0]
     meninggal = data[2].text.split('l')[1].split(' ')[0]
     sembuh = data[3].text.split('h')[1].split(' ')[0]
-
+    
     tgl_Update = soup.find('div', {'class':'covid__header'}).span.text.split(':')[1].split(',')[0]
-
     teks = "Data Covid-19 di Indonesia per" + tgl_Update + "\n"
     teks += "Positif : " + positif + "(" + tambahan + ")" + "\n"
     teks += "Dirawat : " + dirawat + "\n"
     teks += "Sembuh : " + sembuh + "\n"
     teks += "Meninggal dunia (Positif) : " + meninggal + "\n"
-    
+
     return teks
 
 def allKodeKecamatan():
