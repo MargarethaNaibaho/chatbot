@@ -613,9 +613,10 @@ def Tentang():
     return teks
 
 def Sumber():
-    teks = "-| https://www.kompas.com/covid-19\n"
+    teks = "Sumber Data Covid-19 yang tersedia dalam bot adalah : \n"
+    teks += "-| https://www.kompas.com/covid-19\n"
     teks += "-| https://covid19.pemkomedan.go.id/index.php?page=stat_kec\n"
-    teks += "-| http://covid19.sumutprov.go.id"
+    teks += "-| http://covid19.sumutprov.go.id\n"
     teks += "-| https://www.sehatq.com/artikel/daftar-rumah-sakit-untuk-penanganan-virus-corona-covid-19"
     
     return teks
