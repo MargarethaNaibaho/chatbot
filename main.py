@@ -19,8 +19,6 @@ def dataIndonesia():
     teks += "Dirawat : " + dirawat + "\n"
     teks += "Sembuh : " + sembuh + "\n"
     teks += "Meninggal dunia (Positif) : " + meninggal + "\n"
-    
-    return teks
 
 def allKodeKecamatan():
     x = 22
@@ -311,10 +309,9 @@ def handle_message(event):
         )
     
     elif msg == "a":
-        reply = dataIndonesia()
         line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text=reply),
+                TextSendMessage(text=dataIndonesia()),
                 TextSendMessage(text=kembali())
             ]
         )
