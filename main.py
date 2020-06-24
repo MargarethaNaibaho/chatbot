@@ -3,7 +3,6 @@ def dataIndonesia():
     import requests
     source = requests.get('https://www.kompas.com/covid-19')
     soup = BeautifulSoup(source.text, 'lxml')
-    print("Terjadi kesalahan")
     data = soup.find_all('div', {'class':'covid__box2'})
     
     positif = data[0].text.split('i')[2].split(' ')[0]
@@ -19,6 +18,8 @@ def dataIndonesia():
     teks += "Dirawat : " + dirawat + "\n"
     teks += "Sembuh : " + sembuh + "\n"
     teks += "Meninggal dunia (Positif) : " + meninggal + "\n"
+    
+    return teks
 
 def allKodeKecamatan():
     x = 22
@@ -309,9 +310,10 @@ def handle_message(event):
         )
     
     elif msg == "a":
+        reply = dataIndonesia()
         line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text=dataIndonesia()),
+                TextSendMessage(text=reply),
                 TextSendMessage(text=kembali())
             ]
         )
