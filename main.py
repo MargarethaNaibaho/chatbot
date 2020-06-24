@@ -339,7 +339,7 @@ def tampilNamaProvRS():
     nama_provinsi1 = nama_provinsi.sort()
     teks = "Berikut kode dan nama provinsi\n\n"
     for i in range(len(kode_provinsi)):
-        teks += "[" + kode_provinsi[i] + "]" + " " + nama_provinsi1[i] + "\n\n"
+        teks += "[" + kode_provinsi[i] + "]" + " " + nama_provinsi[i] + "\n\n"
 
     teks+= "\nSilahkan masukkan kode sesuai kode nama provinsi RS tujuan yang tersedia"
 
@@ -354,7 +354,7 @@ def cekRumahSakit(koders):
 
 def hasilRS(koders):
     resp = ""
-    resp += "Rumah sakit tujuan di Provinsi "
+    resp += "Rumah sakit rujukan di Provinsi "
     kode = str(koders)
 
     if kode=="e1":
@@ -781,7 +781,7 @@ def handle_message(event):
             )
 
         elif (cekRumahSakit(msg)):
-            reply = hasilProvRS(msg)
+            reply = hasilRS(msg)
             line_bot_api.reply_message(
                 event.reply_token, [
                     TextSendMessage(text=reply),
