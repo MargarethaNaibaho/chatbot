@@ -6,33 +6,24 @@ def kecamatan():
     kecamatan = ["Medan Amplas","Medan Area","Medan Barat","Medan Baru","Medan Belawan","Medan Deli","Medan Denai","Medan Helvetia","Medan Johor","Medan Kota","Medan Labuhan","Medan Maimun","Medan Marelan","Medan Perjuangan","Medan Petisah","Medan Polonia","Medan Selayang","Medan Sunggal","Medan Tembung","Medan Timur","Medan Tuntungan"]
     return kecamatan
 
-def Menu():
-    teks = "Kecamatan apa yang ingin kamu ketahui mengenai CoVid-19?\n\n"
-    
-    kecamatan1 = kecamatan()
-    allKodeKecamatan1 = allKodeKecamatan()
-
-    for i in range(len(kecamatan1)):
-        teks += allKodeKecamatan1[i].upper() + ". " + kecamatan1[i] + "\n" 
-    
-    return teks
-
-def kataSalah():
-    teks = "Keyword tidak tersedia"
-
-    return teks
-
-def kembali():
-    teks = "Ketik 'MENU' untuk ke menu utama"
-
-    return teks
-
 def cekKecamatan(kodekecamatan):
     allKodeKecamatan1 = allKodeKecamatan()
     
     allKodeKecamatan1 = [allKodeKecamatan2.lower() for allKodeKecamatan2 in allKodeKecamatan1]
     
     return kodekecamatan in allKodeKecamatan1
+
+def tampilNamaKecamatan():
+    kode_kecamatan = allKodeKecamatan()
+    nama_kecamatan = kecamatan()
+
+    teks = "Berikut kode dan nama kecamatan\n"
+    for i in range(len(kode_kecamatan)):
+        teks += "[" + kode_kecamatan[i] + "]" + " " + nama_kecamatan[i] + "\n"
+
+    teks+= "\nSilahkan masukkan kode sesuai kecamatan yang tersedia"
+
+    return teks
 
 def hasilKecamatan(kodekecamatan):
     import requests
@@ -109,6 +100,22 @@ def hasilKecamatan(kodekecamatan):
 
     return teks
 
+def Menu():
+    teks = "Menu\n\n"
+    teks += "C. Hasil Kecamatan Medan"
+    
+    return teks
+
+def kataSalah():
+    teks = "Keyword tidak tersedia"
+
+    return teks
+
+def kembali():
+    teks = "Ketik 'MENU' untuk ke menu utama"
+
+    return teks
+
 import requests
 import os
 from flask import Flask, request, abort
@@ -176,7 +183,16 @@ def handle_message(event):
                 TextSendMessage(text=reply)
             ]
         )
-        
+    
+    elif msg == "c":
+        reply = tampilNamaKecamatan()
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text=reply),
+                TextSendMessage(text=kembali())
+            ]
+        )
+    
     else:
         if (cekKecamatan(msg)):
             reply = hasilKecamatan(msg)
