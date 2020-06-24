@@ -606,10 +606,17 @@ def hasilRS(koders):
     return resp
 
 def Tentang():
-    teks = "Chatbot by : UKM Project 2020\n"
-    teks += "Teknologi Informasi-USU\n"
+    teks = "Chatbot oleh : Lit-Z 2020\n"
+    teks += "Lit-Z adalah website berita dan layanan pengulasan plagiarism teks kajian pengguna\n"
+    teks += "Lit-z.com"
     
     return teks
+
+def Sumber():
+    teks = "-| https://www.kompas.com/covid-19\n"
+    teks += "-| https://covid19.pemkomedan.go.id/index.php?page=stat_kec\n"
+    teks += "-| http://covid19.sumutprov.go.id"
+    teks += "-| https://www.sehatq.com/artikel/daftar-rumah-sakit-untuk-penanganan-virus-corona-covid-19"
 
 def Menu():
     teks = "Apa yang ingin kamu ketahui?\n\n"
@@ -618,7 +625,8 @@ def Menu():
     teks += "C. Data Covid-19 di tiap Provinsi di Indonesia\n"
     teks += "D. Data Covid-19 di tiap Kabupaten di Sumatera Utara\n\n"
     teks += "E. Rumah Sakit Rujukan\n"
-    teks += "F. Tentang\n\n"
+    teks += "F. Sumber\n"
+    teks += "G. Tentang\n\n"
 
     teks += "Ketik kode sesuai kode yang tersedia. Contoh : Ketik 'A' untuk melihat data Covid-19 di Indonesia"
     
@@ -744,14 +752,23 @@ def handle_message(event):
         )
 
     elif msg == "f":
+        reply = Sumber()
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text=reply),
+                TextSendMessage(text=kembali())
+            ]
+        ) 
+
+    elif msg == "g":
         reply = Tentang()
         line_bot_api.reply_message(
             event.reply_token, [
                 TextSendMessage(text=reply),
                 TextSendMessage(text=kembali())
             ]
-        )    
-
+        ) 
+    
     else:
         if (cekKecamatan(msg)):
             reply = hasilKecamatan(msg)
