@@ -617,6 +617,8 @@ def Sumber():
     teks += "-| https://covid19.pemkomedan.go.id/index.php?page=stat_kec\n"
     teks += "-| http://covid19.sumutprov.go.id"
     teks += "-| https://www.sehatq.com/artikel/daftar-rumah-sakit-untuk-penanganan-virus-corona-covid-19"
+    
+    return teks
 
 def Menu():
     teks = "Apa yang ingin kamu ketahui?\n\n"
