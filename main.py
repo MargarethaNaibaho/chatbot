@@ -1,26 +1,26 @@
 def dataIndonesia():
-    from bs4 import BeautifulSoup
-    import requests
-    source = requests.get('https://www.kompas.com/covid-19')
-    soup = BeautifulSoup(source.text, 'lxml')
+	from bs4 import BeautifulSoup
+	import requests
+	source = requests.get('https://www.kompas.com/covid-19')
+	soup = BeautifulSoup(source.text, 'html5lib')
 
-    data = soup.find_all('div', {'class':'covid__box2'})
+	data = soup.find_all('div', {'class':'covid__box2'})
 
-    positif = data[0].text.split('i')[2].split(' ')[0]
-    tambahan = data[0].i.text
-    dirawat = data[1].text.split('t')[1].split(' ')[0]
-    meninggal = data[2].text.split('l')[1].split(' ')[0]
-    sembuh = data[3].text.split('h')[1].split(' ')[0]
+	positif = data[0].text.split('i')[2].split(' ')[0]
+	tambahan = data[0].i.text
+	dirawat = data[1].text.split('t')[1].split(' ')[0]
+	meninggal = data[2].text.split('l')[1].split(' ')[0]
+	sembuh = data[3].text.split('h')[1].split(' ')[0]
 
-    tgl_Update = soup.find('div', {'class':'covid__header'}).span.text.split(':')[1].split(',')[0]
+	tgl_Update = soup.find('div', {'class':'covid__header'}).span.text.split(':')[1].split(',')[0]
 
-    teks = "Data Covid-19 di Indonesia per" + tgl_Update + "\n"
-    teks += "Positif : " + positif + "(" + tambahan + ")" + "\n"
-    teks += "Dirawat : " + dirawat + "\n"
-    teks += "Sembuh : " + sembuh + "\n"
-    teks += "Meninggal dunia (Positif) : " + meninggal + "\n"
-    
-    return teks
+	teks = "Data Covid-19 di Indonesia per" + tgl_Update + "\n"
+	teks += "Positif : " + positif + "(" + tambahan + ")" + "\n"
+	teks += "Dirawat : " + dirawat + "\n"
+	teks += "Sembuh : " + sembuh + "\n"
+	teks += "Meninggal dunia (Positif) : " + meninggal + "\n"
+	
+	return teks
 
 def allKodeKecamatan():
     x = 22
@@ -144,7 +144,7 @@ def nameprovinsi():
     import requests
 
     source = requests.get('https://www.kompas.com/covid-19')
-    soup = BeautifulSoup(source.text, 'lxml')
+    soup = BeautifulSoup(source.text, 'html5lib')
 
     nama_prov = soup.find_all('div', {'class':'covid__row'})
     nama_provinsi = []
@@ -179,7 +179,7 @@ def hasilProvinsi(kodeprovinsi):
     import pandas as pd
     import numpy as np
     source = requests.get('https://www.kompas.com/covid-19')
-    soup = BeautifulSoup(source.text, 'lxml')
+    soup = BeautifulSoup(source.text, 'html5lib')
     
     nama_prov = soup.find_all('div', {'class':'covid__row'})
     tgl_Update = soup.find('div', {'class':'covid__header'}).span.text.split(':')[1].split(',')[0]
