@@ -354,8 +354,8 @@ def cekRumahSakit(koders):
 
 def hasilRS(koders):
     resp = ""
-    resp += "Rumah sakit rujukan di Provinsi "
-    kode = str(kode).
+    resp += "Rumah sakit tujuan di Provinsi "
+    kode = str(koders)
 
     if kode=="e1":
         resp += "Aceh\n"
@@ -608,6 +608,8 @@ def hasilRS(koders):
 def Tentang():
     teks = "Chatbot by : UKM Project 2020\n"
     teks += "Teknologi Informasi-USU\n"
+    
+    return teks
 
 def Menu():
     teks = "Apa yang ingin kamu ketahui?\n\n"
@@ -631,8 +633,6 @@ def kembali():
     teks = "Ketik 'MENU' untuk ke menu utama"
 
     return teks
-
-
 
 import requests
 import os
@@ -753,8 +753,8 @@ def handle_message(event):
         )    
 
     else:
-        if (cekRumahSakit(msg)):
-            reply = hasilRS(msg)
+        if (cekKecamatan(msg)):
+            reply = hasilKecamatan(msg)
             line_bot_api.reply_message(
                 event.reply_token, [
                     TextSendMessage(text=reply),
@@ -780,8 +780,8 @@ def handle_message(event):
                 ]
             )
 
-        elif (cekKabupaten(msg)):
-            reply = hasilKabupaten(msg)
+        elif (cekRumahSakit(msg)):
+            reply = hasilProvRS(msg)
             line_bot_api.reply_message(
                 event.reply_token, [
                     TextSendMessage(text=reply),
