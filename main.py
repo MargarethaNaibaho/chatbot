@@ -314,7 +314,7 @@ def handle_message(event):
         reply = dataIndonesia()
         line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text=reply)
+                TextSendMessage(text=reply),
                 TextSendMessage(text=kembali())
             ]
         )
@@ -323,7 +323,7 @@ def handle_message(event):
         reply = tampilNamaProvinsi()
         line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text=reply)
+                TextSendMessage(text=reply),
                 TextSendMessage(text=kembali())
             ]
         )
@@ -332,7 +332,8 @@ def handle_message(event):
         reply = tampilNamaKecamatan()
         line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text=reply)
+                TextSendMessage(text=reply),
+                TextSendMessage(text=kembali())
             ]
         )
 
