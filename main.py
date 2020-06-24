@@ -626,7 +626,7 @@ def Menu():
     teks += "A. Data Covid-19 di Indonesia\n"
     teks += "B. Data Covid-19 di tiap Kecamatan di Kota Medan\n"
     teks += "C. Data Covid-19 di tiap Provinsi di Indonesia\n"
-    teks += "D. Data Covid-19 di tiap Kabupaten di Sumatera Utara\n\n"
+    teks += "D. Data Covid-19 di tiap Kabupaten di Sumatera Utara\n"
     teks += "E. Rumah Sakit Rujukan\n"
     teks += "F. Sumber\n"
     teks += "G. Tentang\n\n"
