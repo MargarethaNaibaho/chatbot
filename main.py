@@ -1,5 +1,11 @@
 def allKodeKecamatan():
-    kode = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U"]
+    x = 22
+
+    kode = []
+    for i in range(1, x, 1):
+        angka = str(i)
+        kode.append("D"+angka)
+
     return kode
 
 def kecamatan():
