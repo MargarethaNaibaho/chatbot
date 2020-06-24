@@ -339,7 +339,7 @@ def tampilNamaProvRS():
     nama_provinsi1 = nama_provinsi.sort()
     teks = "Berikut kode dan nama provinsi\n\n"
     for i in range(len(kode_provinsi)):
-        teks += "[" + kode_provinsi[i] + "]" + " " + nama_provinsi[i] + "\n\n"
+        teks += "[" + kode_provinsi[i] + "]" + " " + nama_provinsi[i] + "\n"
 
     teks+= "\nSilahkan masukkan kode sesuai kode nama provinsi RS tujuan yang tersedia"
 
